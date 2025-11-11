@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List</title>
+  <style>
+    body {
+      text-align: center;
+      background-color: pink;
+    }
+    button {
+      background-color: greenyellow;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>My FIRST TODO LIST</h1>
+    <h2>Below is mentioned my Todo</h2>
+
+    <div id="todo-list">
+      <div id="todo-0">
+        <h4>Wake up at 7 a.m in morning</h4>
+        <button onclick="deleteTodo(0)">Delete</button>
+      </div>
+
+      <div id="todo-1">
+        <h4>Sit for the study at 7.15 a.m</h4>
+        <button onclick="deleteTodo(1)">Delete</button>
+      </div>
+    </div>
+
+    <input type="text" id="todo-input" />
+    <button onclick="addTodo()">Add todo!</button>
+  </div>
+
+  <script>
+    let count = 2; // Because we already have todo-0 and todo-1
+
+    function addTodo() {
+      let value = document.querySelector("#todo-input").value.trim();
+      if (value === "") return alert("Please enter a todo!");
+
+      let newDivEl = document.createElement("div");
+      newDivEl.id = "todo-" + count; // Unique id for each new todo
+      newDivEl.innerHTML = `<h4>${value}</h4><button onclick="deleteTodo(${count})">Delete</button>`;
+      
+      document.querySelector("#todo-list").appendChild(newDivEl);
+      count++;
+      document.querySelector("#todo-input").value = "";
+    }
+
+    function deleteTodo(index) {
+      const element = document.getElementById("todo-" + index);
+      if (element) {
+        element.parentNode.removeChild(element);
+      }
+    }
+  </script>
+</body>
+</html>

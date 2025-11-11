@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        button {
+            background-color: greenyellow;
+            margin: 5px;
+        }
+        body {
+            text-align: center;
+            background-color: pink;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1> My FIRST TODO LIST</h1>
+        <h2> Below is mentioned Todo </h2>
+         <!-- ✅ todo list container -->
+        <div id="todo-list">
+            <div id = "todo-1">
+                <h4>Wake up at 7 a.m in morning</h4>
+                <button onclick="deleteTodo(1)">Delete</button>
+            </div>
+            <div id ="todo-2">
+                <h4>Sit for the study at 7.15 a.m</h4>
+                <button onclick="deleteTodo(2)">Delete</button>
+            </div>
+
+        </div>
+ <!-- input for new todo -->
+        <input type="text" id="todo-input" placeholder="Add your todo!"></input>
+        <button onclick=" addTodo()"> Add todo!</button>
+    </div>
+    <script>
+        let count = 3 // Because we already have todo-1and todo-2
+        function addTodo() {
+            let value = document.querySelector("#todo-input").value.trim();
+            if (value === "") return alert("please enter a todo")
+             // create new div for the todo
+            const newDivEl = document.createElement("div")
+            newDivEl.id = "todo-" + count;// Unique id for each new todo
+            // newDivEl.innerHTML = `<h4> ${value}</h4><button onclick ="deleteTodo(${count})" >Delete</button>`;
+            // below line also work we use <h4> becuse above todo in <h4> tag to keep same i used above
+            newDivEl.innerHTML = `<div> ${value}</div><button onclick ="deleteTodo(${count})" >Delete</button>`;//
+
+
+            document.querySelector("#todo-list").appendChild(newDivEl)// append new todo to main list
+            count++ // increase count for next todo
+            document.querySelector("#todo-input").value = "";  // clear the input field
+        }
+
+        function deleteTodo(index) {
+            const element = document.getElementById("todo-" + index)
+            //“If the element exists, then remove it — otherwise, leave it alone
+            if(element) //checks whether the element is there (not null).
+            element.parentNode.removeChild(element)
+
+        }
+    </script>
+
+</body>
+
+</html>
